@@ -220,3 +220,338 @@ code, .mono { font-family: 'JetBrains Mono', monospace; }
 
 def inject_css() -> None:
     st.markdown(CSS, unsafe_allow_html=True)
+
+
+# CSS tambahan khusus mode satu halaman (tidak mengubah CSS lama di atas)
+_ONEPAGE_CSS = """
+<style>
+/* ===== KUNCI TIDAK SCROLL ===== */
+html, body,
+[data-testid="stAppViewContainer"],
+[data-testid="stMain"] {
+  height: 100vh !important;
+  overflow: hidden !important;
+}
+
+/* ===== KONTAINER UTAMA ===== */
+[data-testid="stMainBlockContainer"] {
+  max-width: 100% !important;
+  padding: .35rem .7rem .15rem !important;
+}
+
+/* ===== SEMBUNYIKAN ELEMEN BAWAAN STREAMLIT ===== */
+[data-testid="stHeader"],
+[data-testid="stToolbar"],
+[data-testid="stDecoration"],
+[data-testid="stStatusWidget"],
+footer, #MainMenu,
+[data-testid="stMainMenuButton"] {
+  display: none !important;
+}
+[data-testid="stSidebar"] { display: none !important; }
+
+/* ===== SKALA FONT BERBASIS TINGGI LAYAR ===== */
+html { font-size: clamp(16px, 2.4vh, 22px) !important; }
+
+/* ===== GAP ANTAR BLOK VERTIKAL ===== */
+[data-testid="stVerticalBlock"] { gap: .28rem !important; }
+[data-testid="stVerticalBlockBorderWrapper"] { gap: .28rem !important; }
+
+/* ===== TOMBOL KOMPAK (default glass) ===== */
+[data-testid="stButton"] button,
+[data-testid="stDownloadButton"] button {
+  min-height: 2.3rem !important;
+  height: 2.3rem !important;
+  padding: 0 .9rem !important;
+  font-size: .9rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: .04em !important;
+  border-radius: 999px !important;
+}
+
+/* ===== TOMBOL ENKRIPSI — hijau mencolok ===== */
+.st-key-tb_enkripsi button,
+.st-key-btn_dekripsi_inline + div .st-key-tb_enkripsi button {
+  background: linear-gradient(135deg, #16a34a, #15803d) !important;
+  border-color: #16a34a !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 14px rgba(22,163,74,.35) !important;
+}
+.st-key-tb_enkripsi button:hover {
+  background: linear-gradient(135deg, #15803d, #166534) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* ===== TOMBOL DEKRIPSI — biru mencolok ===== */
+.st-key-tb_dekripsi button {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8) !important;
+  border-color: #2563eb !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 14px rgba(37,99,235,.35) !important;
+}
+.st-key-tb_dekripsi button:hover {
+  background: linear-gradient(135deg, #1d4ed8, #1e40af) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* ===== TOMBOL INLINE DEKRIPSI PESAN — biru ===== */
+.st-key-btn_dekripsi_inline button {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8) !important;
+  border-color: #2563eb !important;
+  color: #ffffff !important;
+  box-shadow: 0 3px 10px rgba(37,99,235,.3) !important;
+}
+.st-key-btn_dekripsi_inline button:hover {
+  background: linear-gradient(135deg, #1d4ed8, #1e40af) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* ===== INPUT KOMPAK ===== */
+[data-testid="stTextInput"] input {
+  height: 2.2rem !important;
+  font-size: .95rem !important;
+  padding: .2rem .7rem !important;
+}
+[data-testid="stTextArea"] textarea {
+  font-size: .92rem !important;
+  min-height: 3.6rem !important;
+}
+[data-testid="stFileUploader"] {
+  font-size: .9rem !important;
+}
+[data-testid="stFileUploader"] section {
+  padding: .45rem .6rem !important;
+}
+[data-testid="stFileUploaderDropzoneInstructions"] span {
+  font-size: .88rem !important;
+}
+
+/* ===== KARTU (st.container border=True) ===== */
+[class*="st-key-card_"] > div[data-testid="stVerticalBlockBorderWrapper"] > div {
+  overflow: auto !important;
+  height: 100% !important;
+}
+/* Tinggi anggaran per baris */
+[class*="st-key-card_row1_"] {
+  height: 37vh !important;
+}
+[class*="st-key-card_row2_"] {
+  height: 21vh !important;
+}
+[class*="st-key-card_row3_"] {
+  height: 22vh !important;
+}
+
+/* ===== HEADER ONEPAGE ===== */
+.op-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .6rem;
+  padding: .3rem .5rem .2rem;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: .2rem;
+}
+.op-logo {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  color: var(--ink);
+  font: 800 1.4rem/1 'Plus Jakarta Sans', sans-serif;
+  white-space: nowrap;
+}
+.op-logo-sub {
+  font: 600 .78rem/1 'Inter', sans-serif;
+  color: var(--muted);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  margin-top: .18rem;
+}
+.op-info-fields {
+  display: flex;
+  gap: .55rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.op-info-field {
+  display: flex;
+  flex-direction: column;
+  padding: .28rem .6rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: rgba(255,255,255,.55);
+  min-width: 5.5rem;
+}
+.op-info-label {
+  font-size: .75rem;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  margin-bottom: .1rem;
+}
+.op-info-value {
+  font-size: .95rem;
+  font-weight: 600;
+  color: var(--ink);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ===== TOOLBAR ===== */
+.op-toolbar {
+  display: flex;
+  gap: .3rem;
+  align-items: center;
+  margin-bottom: .2rem;
+}
+
+/* ===== JUDUL KARTU ===== */
+.card-title {
+  font-size: .9rem;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  margin-bottom: .2rem;
+  padding-bottom: .15rem;
+  border-bottom: 1px solid var(--line);
+}
+
+/* ===== TABEL METRIK ===== */
+.metrics-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .88rem;
+  font-family: 'JetBrains Mono', monospace;
+}
+.metrics-table th {
+  font-size: .8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: .18rem .35rem;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+}
+.metrics-table td {
+  padding: .14rem .35rem;
+  border-bottom: 1px solid rgba(20,23,43,.04);
+  color: var(--secondary);
+}
+.metrics-table td:first-child {
+  color: var(--ink);
+  font-weight: 600;
+}
+.metrics-table tr:last-child td { border-bottom: none; }
+
+/* ===== GRID STATUS KUNCI SALAH ===== */
+.key-test-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .3rem .5rem;
+  font-size: .78rem;
+}
+.key-test-item label {
+  color: var(--muted);
+  font-size: .82rem;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+.key-test-item span {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  color: var(--ink);
+  font-size: .92rem;
+}
+.status-badge {
+  display: inline-block;
+  padding: .14rem .55rem;
+  border-radius: 999px;
+  font-size: .82rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+}
+.status-rejected {
+  background: rgba(220,38,38,.12);
+  color: #dc2626;
+  border: 1px solid rgba(220,38,38,.25);
+}
+.status-pass {
+  background: rgba(15,157,138,.12);
+  color: #0f9d8a;
+  border: 1px solid rgba(15,157,138,.25);
+}
+
+/* ===== FOOTER ===== */
+.op-footer {
+  text-align: center;
+  font-size: .82rem;
+  color: var(--muted);
+  padding: .12rem 0 .05rem;
+  border-top: 1px solid var(--line);
+  margin-top: .15rem;
+}
+
+/* ===== RADIO HORIZONTAL KOMPAK ===== */
+[data-testid="stRadio"] > div {
+  flex-direction: row !important;
+  gap: .5rem !important;
+  flex-wrap: wrap;
+}
+[data-testid="stRadio"] label {
+  font-size: .95rem !important;
+}
+
+/* ===== SELECT SLIDER ===== */
+[data-testid="stSlider"] {
+  padding: .1rem 0 !important;
+}
+
+/* ===== CAPTION ===== */
+[data-testid="stCaptionContainer"] p {
+  font-size: .85rem !important;
+}
+
+/* ===== GAMBAR PREVIEW ===== */
+.preview-img {
+  max-height: 15vh;
+  width: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+  display: block;
+}
+
+/* ===== PROGRESS ===== */
+[data-testid="stProgressBar"] {
+  height: .35rem !important;
+}
+
+/* ===== POPOVER KOMPAK ===== */
+[data-testid="stPopover"] button {
+  font-size: .88rem !important;
+  height: 1.9rem !important;
+  padding: 0 .6rem !important;
+}
+
+/* ===== st.tabs di dalam kartu ===== */
+[class*="st-key-card_row3_metode"] [data-testid="stTab"] button {
+  font-size: .9rem !important;
+  padding: .28rem .65rem !important;
+  min-height: 1.9rem !important;
+}
+
+/* ===== CHART KOMPAK ===== */
+[data-testid="stVegaLiteChart"] {
+  max-height: 12vh !important;
+}
+</style>
+"""
+
+
+def inject_onepage_css() -> None:
+    """Inject CSS tambahan untuk mode satu halaman tanpa scroll.
+    Dipanggil setelah inject_css() di streamlit_app.py.
+    CSS lama di inject_css() tidak diubah.
+    """
+    st.markdown(_ONEPAGE_CSS, unsafe_allow_html=True)
