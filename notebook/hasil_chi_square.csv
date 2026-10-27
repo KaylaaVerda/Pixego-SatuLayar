@@ -1,0 +1,19 @@
+cover,mode,penggunaan_kapasitas,p_value
+tekstur,cover asli,0%,0.0
+tekstur,sequential,10%,0.0
+tekstur,random,10%,0.0
+tekstur,sequential,25%,0.0
+tekstur,random,25%,0.0007
+tekstur,sequential,50%,0.1877
+tekstur,random,50%,0.3647
+tekstur,sequential,100%,0.9995
+tekstur,random,100%,1.0
+polos,cover asli,0%,0.0
+polos,sequential,10%,0.0
+polos,random,10%,0.0
+polos,sequential,25%,0.0
+polos,random,25%,0.0
+polos,sequential,50%,0.0
+polos,random,50%,0.0
+polos,sequential,100%,1.0
+polos,random,100%,0.9988

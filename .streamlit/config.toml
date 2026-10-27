@@ -1,0 +1,13 @@
+[theme]
+base = "light"
+backgroundColor = "#f7f7f7"
+textColor = "#14172b"
+primaryColor = "#14172b"
+secondaryBackgroundColor = "#ffffff"
+chartCategoricalColors = ["#3f6fae", "#5e4b8b", "#0f9d8a"]
+
+[server]
+maxUploadSize = 5
+
+[browser]
+gatherUsageStats = false

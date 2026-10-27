@@ -1,0 +1,23 @@
+# Lingkungan Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Keluaran yang dibuat saat menjalankan notebook atau CLI
+notebook/stego_demo.png
+src/stego.png
+src/cover_kecil.png
+
+# Editor dan sistem operasi
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Jangan commit file rahasia atau gambar pribadi
+.env
+*.key

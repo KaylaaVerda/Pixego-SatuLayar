@@ -1,0 +1,1 @@
+"""Antarmuka web Pixego."""
